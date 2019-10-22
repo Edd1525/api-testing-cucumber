@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const buildUrl = require('build-url');
-// const baseUrl = 'https://dev-id.safefleetcloud.com'
-const baseUrl = 'https://dev-ddp.vmaxlive.net:443'
+// const baseUrl = 'xxx'
+const baseUrl = 'xxx'
 
 // The last response that we received
 let lastResponse;
@@ -18,7 +18,7 @@ function get(url) {
     const headers = {};
     if (accessToken) {
         headers.authorization.key = 'DDPAuthorization',
-        headers.authorization.value = 'Bearer ' + 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE3NjAxMTg4MTMsImZsZWV0IjoidGVzdGZsZWV0MjAiLCJ1c2VySWQiOiJjcm9tZXJvIiwiYXBwbGljYXRpb24iOiJWTUFYTElWRSIsInNlcnZlciI6InNlcnZlcjEifQ.AFRoWJ36gIpLTVdwJX2ZsalL7oBUbP_H_Ozgm0wH6oZdEZFs7W_-uLXyufIUldcOpHCaoU4KHj8Oqbsu_t8Dsg'
+        headers.authorization.value = 'Bearer ' + 'xxx'
     }
 
     lastResponse = fetch(realUrl, { headers: headers })

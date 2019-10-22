@@ -4,8 +4,8 @@ const requester = require('./requester');
 Given('a valid admin user', async () => {
 
     const body = {
-        "client_id": "7705702d-e6c1-95b7-6851-8b2a300bf057",
-        "client_secret": "322eaf21-4cab-b27f-f13a-67690b565a8b",
+        "client_id": "77057202d-e6c1-295b7-6851-8b2a300bf05733",
+        "client_secret": "2322eaf21-4cab-db27f-f13a-67690b565a8b333",
         "grant_type": "client_credentials"
     }
 
