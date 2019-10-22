@@ -1,0 +1,16 @@
+{
+  "name": "ddp-api-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/cucumber-js features/createAssetCollection.feature"
+  },
+  "author": "Edward Bustamante <ebustamantea@psl.com.co> (http://seon.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "build-url": "^1.3.3",
+    "cucumber": "^6.0.2",
+    "node-fetch": "^2.6.0"
+  }
+}
