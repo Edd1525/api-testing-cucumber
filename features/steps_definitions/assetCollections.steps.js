@@ -1,43 +1,79 @@
 const { Given, When, Then } = require('cucumber');
-const requester = require('./requester');
+const { URLSearchParams } = require('url');
+const request = require('request');
 
 Given('a valid admin user', async () => {
 
-    const body = {
-        "client_id": "77057202d-e6c1-295b7-6851-8b2a300bf05733",
-        "client_secret": "2322eaf21-4cab-db27f-f13a-67690b565a8b333",
-        "grant_type": "client_credentials"
-    }
+    //  const body = { a: 1 };
 
-    console.log('Entre al Given')
-    const responseToken = await requester.post('/connect/token', body)
-    const responseIntegrations = await requester.get('/v2/integrations', { qs: { fleet: 'testfleet20', application: 'SEON' } })
-    console.log('! + > + > + > + > + > + > !  : responseIntegrations', responseIntegrations)
+    // const body = {
+    //     "client_id": "7705702d-e6c1-95b7-6851-8b2a300bf057",
+    //     "client_secret": "322eaf21-4cab-b27f-f13a-67690b565a8b",
+    //     "grant_type":"client_credentials"
+    // }
 
-    const deviceBody = {
-        "deviceId": "{{deviceId}}",
-        "remoteId": "{{deviceId}}",
-        "source": "{{source}}"
-    }
+    // const responseRequest = request.get({
+    //     url: 'https://dev-id.safefleetcloud.com/connect/token',
+    //     body: {
+    //         "client_id": "7705702d-e6c1-95b7-6851-8b2a300bf057",
+    //         "client_secret": "322eaf21-4cab-b27f-f13a-67690b565a8b",
+    //         "grant_type": "client_credentials"
+    //     }
+    // });
 
-    // set DDPAuthorization Bearer
-    await requester.post('/devices', deviceBody)
+    // var request = require('request')
 
-    // set DDPAuthorization Bearer
-    await requester.get('/v2/accounts/:fleet/:sourceType')
+    var url = 'https://dev-ddp.vmaxlive.net:443/v2/assetcollections'
 
-    const bodyAssetCollections = {
-        "device": {
-            "accountId": "{{accountId}}",
-            "id": "{{deviceId}}"
+    var postData = {
+        device: {
+            accountId: "2847",
+            id: "DeviceId697"
         },
-        "fleetId": "{{fleet}}",
-        "name": "{{$randomFirstName}}",
-        "notes": "{{$randomPhrase}}",
-        "uvId": "{{$randomUUID}}"
+        fleetId: "testfleet20",
+        name: "Hellen",
+        notes: "Use the redundant JBOD pixel, then you can synthesize the multi-byte matrix!",
+        uvId: "735f4f3b-4051-460e-bc3a-1fbc95fba7d0"
     }
 
-    await requester.post('/v2/assetcollections', bodyAssetCollections)
+    var options = {
+        headers: {
+            Authorization: "Bearer xxxx"
+        },
+        method: 'post',
+        body: postData,
+        json: true,
+        url: url
+    };
+
+    const requestT = request(options, function (err, res, body) {
+        if (err) {
+            console.error('error posting json: ', err)
+            throw err
+        }
+        var headers = res.headers
+        var statusCode = res.statusCode
+        console.log('headers: ', headers)
+        console.log('statusCode: ', statusCode)
+        console.log('body: ', body)
+    })
+
+    console.log('! + > + > + > + > + > + > !  : request', requestT)
+
+    // const requestT = request(options, function (err, res, body) {
+    //     if (err) {
+    //         console.error('error posting json: ', err)
+    //         throw err
+    //     }
+    //     var headers = res.headers
+    //     var statusCode = res.statusCode
+    //     console.log('headers: ', headers)
+    //     console.log('statusCode: ', statusCode)
+    //     console.log('body: ', body)
+    // })
+
+
+
 });
 
 Given('a valid integration', function () {

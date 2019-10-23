@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const buildUrl = require('build-url');
 // const baseUrl = 'xxx'
-const baseUrl = 'xxx'
+const baseUrl = 'https://dev-id.safefleetcloud.com'
 
 // The last response that we received
 let lastResponse;
@@ -17,8 +17,7 @@ function get(url) {
 
     const headers = {};
     if (accessToken) {
-        headers.authorization.key = 'DDPAuthorization',
-        headers.authorization.value = 'Bearer ' + 'xxx'
+        headers.authorization.value = 'Bearer ' + ''
     }
 
     lastResponse = fetch(realUrl, { headers: headers })
@@ -52,14 +51,12 @@ async function post(url, body) {
     });
 
     const headers = {};
-    headers['content-type'] = 'application/json';
     if (accessToken) {
-        headers.authorization = 'Bearer ' + accessToken;
+        headers.authorization.value = 'Bearer ' + ''
     }
 
     lastResponse = fetch(realUrl, { method: 'POST', headers: headers, body: JSON.stringify(body) })
         .then((res) => {
-            let bodyPromise;
             const contentType = res.headers.get('content-type') || '';
             if (contentType.indexOf('application/json') >= 0) {
                 bodyPromise = res.json();
@@ -68,15 +65,17 @@ async function post(url, body) {
             }
 
             return bodyPromise.then((body) => {
-                return {
+                const response = {
                     status: res.status,
                     headers: res.headers.raw(),
                     body: body
                 };
+                return response
             });
-        });
+        })
+        .then(json => console.log(json));
+    console.log('! + > + > + > + > + > + > !  : post -> lastResponse', lastResponse)
 
-    console.log('! + > + > + > + > + > + > !  : post -> lastResponse', await lastResponse)
     return lastResponse;
 }
 
